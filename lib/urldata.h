@@ -1314,6 +1314,7 @@ struct UrlState {
   int drain; /* Increased when this stream has data to read, even if its
                 socket not necessarily is readable. Decreased when
                 checked. */
+  int pump;
 };
 
 

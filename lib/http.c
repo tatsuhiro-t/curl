@@ -176,6 +176,10 @@ CURLcode Curl_http_setup_conn(struct connectdata *conn)
   http->len = BUFSIZE;
   http->memlen = 0;
 
+  http->upload_mem = NULL;
+  http->upload_len = 0;
+  http->upload_left = 0;
+
   return CURLE_OK;
 }
 

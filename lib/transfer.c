@@ -1050,6 +1050,10 @@ CURLcode Curl_readwrite(struct connectdata *conn,
     select_res |= CURL_CSELECT_IN;
     DEBUGF(infof(data, "%s: forcibly told to drain data\n", __func__));
   }
+  if(conn->data->state.pump) {
+    select_res |= CURL_CSELECT_OUT;
+    DEBUGF(infof(data, "%s: forcibly told to upload data\n", __func__));
+  }
 
   if(!select_res) /* Call for select()/poll() only, if read/write/error
                      status is not known. */
