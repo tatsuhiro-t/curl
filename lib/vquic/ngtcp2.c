@@ -1289,8 +1289,7 @@ static int cb_h3_acked_stream_data(nghttp3_conn *conn, int64_t stream_id,
 {
   struct Curl_easy *data = stream_user_data;
   struct HTTP *stream = data->req.p.http;
-  (void)conn;
-  (void)stream_id;
+  int rv;
   (void)user_data;
 
   if(!data->set.postfields) {
@@ -1299,6 +1298,13 @@ static int cb_h3_acked_stream_data(nghttp3_conn *conn, int64_t stream_id,
                  "cb_h3_acked_stream_data, %zd bytes, %zd left unacked\n",
                  datalen, stream->h3out->used));
     DEBUGASSERT(stream->h3out->used < H3_SEND_SIZE);
+
+    if(stream->h3out->used == 0) {
+      rv = nghttp3_conn_resume_stream(conn, stream_id);
+      if(rv != 0) {
+        return NGTCP2_ERR_CALLBACK_FAILURE;
+      }
+    }
   }
   return 0;
 }
