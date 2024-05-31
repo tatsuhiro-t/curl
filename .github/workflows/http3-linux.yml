@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: curl
 
-name: ngtcp2-linux
+name: http3-linux
 
 on:
   push:
@@ -39,7 +39,7 @@ on:
 
 concurrency:
   # Hardcoded workflow filename as workflow name above is just Linux again
-  group: ngtcp2-${{ github.event.pull_request.number || github.sha }}
+  group: http3-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
 
 permissions: {}
