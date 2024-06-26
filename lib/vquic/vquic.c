@@ -343,6 +343,7 @@ static size_t msghdr_get_udp_gro(struct msghdr *msg)
 #ifndef __GLIBC__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wsign-compare"
+#pragma clang diagnostic ignored "-Wcast-align"
 #endif
   for(cmsg = CMSG_FIRSTHDR(msg); cmsg; cmsg = CMSG_NXTHDR(msg, cmsg)) {
 #ifndef __GLIBC__
