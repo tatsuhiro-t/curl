@@ -7,7 +7,7 @@ name: curl-for-win
 on:
   push:
     branches:
-      - master
+      - quic-udp-gro-testing
       - '*/ci'
   pull_request:
     branches:
